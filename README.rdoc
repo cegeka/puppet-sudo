@@ -1,0 +1,5 @@
+= puppet-sudo module
+
+{<img src='https://codex.cegeka.be/jenkins/job/puppet-sudo/badge/icon' />}[https://codex.cegeka.be/jenkins/job/puppet-sudo/]
+
+This is the sudo module.
