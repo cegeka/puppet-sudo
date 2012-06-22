@@ -47,8 +47,8 @@ define sudo::conf(
     Class['sudo'] -> Sudo::Conf[$name]
 
     file { "${priority}_${name}":
-        path    => "${sudo_config_dir}${priority}_${name}",
         ensure  => $ensure,
+        path    => "${sudo_config_dir}${priority}_${name}",
         owner   => 'root',
         group   => 'root',
         mode    => '0440',
