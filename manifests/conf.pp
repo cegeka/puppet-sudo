@@ -1,6 +1,6 @@
 # Define: sudo::conf
 #
-# This module manages sudoa configurations
+# This module manages sudo configurations
 #
 # Parameters:
 #   [*ensure*]
@@ -44,7 +44,7 @@ define sudo::conf(
   $sudo_config_dir = $sudo::params::config_dir
 ) {
 
-    Class['sudo'] -> Sudo::Conf[$name]
+  Class['sudo'] -> Sudo::Conf[$name]
 
     file { "${priority}_${name}":
         ensure  => $ensure,
