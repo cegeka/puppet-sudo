@@ -3,97 +3,46 @@
 # This module manages sudo
 #
 # Parameters:
-#   [*ensure*]
-#     Ensure if present or absent.
+#   [*version*]
+#     Ensure if present or latest.
 #     Default: present
-#
-#   [*autoupgrade*]
-#     Upgrade package automatically, if there is a newer version.
-#     Default: false
-#
-#   [*package*]
-#     Name of the package.
-#     Only set this, if your platform is not supported or you know, what you're doing.
-#     Default: auto-set, platform specific
-#
-#   [*config_file*]
-#     Main configuration file.
-#     Only set this, if your platform is not supported or you know, what you're doing.
-#     Default: auto-set, platform specific
-#
-#   [*config_file_replace*]
-#     Replace configuration file with that one delivered with this module
-#     Default: true
-#
-#   [*config_dir*]
-#     Main configuration directory
-#     Only set this, if your platform is not supported or you know, what you're doing.
-#     Default: auto-set, platform specific
-#
-#   [*source*]
-#     Alternate source file location
-#     Only set this, if your platform is not supported or you know, what you're doing.
-#     Default: auto-set, platform specific
 #
 # Actions:
 #
 # Requires:
-#   Nothing
+#   stdlib
 #
 # Sample Usage:
 #   class { 'sudo': }
 #
 # [Remember: No empty lines between comments and class definition]
-class sudo(
-  $ensure = 'present',
-  $autoupgrade = false,
-  $package = $sudo::params::package,
-  $config_file = $sudo::params::config_file,
-  $config_file_replace = true,
-  $config_dir = $sudo::params::config_dir,
-  $source = $sudo::params::source
+class sudo($version='present') {
 
-) inherits sudo::params {
-
-  case $ensure {
-    /(present)/: {
-      $dir_ensure = 'directory'
-      if $autoupgrade == true {
-        $package_ensure = 'latest'
-      } else {
-        $package_ensure = 'present'
-      }
-    }
-    /(absent)/: {
-      $package_ensure = 'absent'
-      $dir_ensure = 'absent'
+  case $version {
+    'present', 'latest': {
+      $version_real = $version
     }
     default: {
-      fail('ensure parameter must be present or absent')
+      fail('Class[sudo]: parameter version must be present or latest')
     }
   }
 
-  package { $package:
-    ensure => $package_ensure,
+  case $::osfamily {
+    'RedHat': {
+      include stdlib
+      include sudo::params
+
+      class { 'sudo::package':
+        version => $version_real
+      }
+
+      class { 'sudo::config': }
+
+      Class['sudo::package'] -> Class['sudo::config']
+    }
+    default: {
+      fail("Class[sudo]: osfamily ${::osfamily} is not supported")
+    }
   }
 
-  file { $config_file:
-    ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0440',
-    replace => $config_file_replace,
-    source  => $source,
-    require => Package[$package],
-  }
-
-  file { $config_dir:
-    ensure  => $dir_ensure,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0550',
-    recurse => true,
-    purge   => true,
-    require => Package[$package],
-  }
 }
