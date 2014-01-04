@@ -11,27 +11,33 @@ Use this module to modify the default sudo security policy.
   sudo::config::user_alias { 'FULLTIMERS' :
     configuration => 'FULLTIMERS = millert, mikef, dowdy'
   }
+  # User_Alias    FULLTIMERS = millert, mikef, dowdy
 
 === Runas aliases
 
   sudo::config::runas_alias { 'db' :
     configuration => 'DB = oracle, sybase'
   }
+	# Runas_Alias    DB = oracle, sybase
 
 === Host aliases
 
   sudo::config::host_alias { 'SERVERS' :
     configuration => 'SERVERS = master, mail, www, ns'
   }
+  # Host_Alias    SERVERS = master, mail, www, ns
 
 === Cmnd aliases
 
   sudo::config::cmnd_alias { 'admins-elev' :
     configuration => 'ADMINELEV = ALL'
   }
+  # Cmnd_Alias    ADMINELEV = ALL
+
   sudo::config::cmnd_alias { 'su' :
     configuration => 'SU = /usr/bin/su'
   }
+  # Cmnd_Alias    SU = /usr/bin/su
 
 === Defaults
 
@@ -40,13 +46,18 @@ Use this module to modify the default sudo security policy.
   sudo::config::default_entry { 'visiblepw' :
     configuration => '!visiblepw'
   }
+  # Defaults !visiblepw
+
   sudo::config::default_entry { 'always_set_home' :
     configuration => 'always_set_home'
   }
+	# Defaults always_set_home
+
   sudo::config::default_entry { 'secure_path' :
     type          => 'global',
     configuration => 'secure_path = /sbin:/bin:/usr/sbin:/usr/bin'
   }
+  # Defaults secure_path = /sbin:/bin:/usr/sbin:/usr/bin
 
 ==== Environment settings
 
@@ -62,6 +73,13 @@ Use this module to modify the default sudo security policy.
       'env_keep += "SSH_AUTH_SOCK"'
     ]
   }
+  # Defaults env_reset
+  # Defaults env_keep =  "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS"
+  # Defaults env_keep += "MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
+  # Defaults env_keep += "LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
+  # Defaults nv_keep += "LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
+  # Defaults env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
+  # Defaults env_keep += "SSH_AUTH_SOCK"
 
 ==== Cmnd_List
 
@@ -69,6 +87,7 @@ Use this module to modify the default sudo security policy.
     type          => 'cmnd',
     configuration => 'PAGERS noexec'
   }
+  # Defaults!PAGERS noexec
 
 ==== Host_List
 
@@ -76,6 +95,7 @@ Use this module to modify the default sudo security policy.
     type          => 'host',
     configuration => 'SERVERS log_year, logfile=/var/log/sudo.log'
   }
+  # Defaults@SERVERS log_year, logfile=/var/log/sudo.log
 
 ==== Runas_List
 
@@ -83,6 +103,7 @@ Use this module to modify the default sudo security policy.
     type          => 'runas',
     configuration => 'root !set_logname'
   }
+  # Defaults>root !set_logname
 
 ==== User_List
 
@@ -90,20 +111,24 @@ Use this module to modify the default sudo security policy.
     type          => 'user',
     configuration => 'millert	!authenticate'
   }
+  # Defaults:millert !authenticate
 
 === User specification
 
   sudo::config::user { 'root' :
     configuration => 'ALL=(ALL)       ALL'
   }
+  # root    ALL=(ALL)       ALL
 
   sudo::config::user { 'admin_group' :
     user => '%admin',
     configuration => 'ALL=(ALL)       NOPASSWD: ALL'
   }
+  # %admin    ALL=(ALL)       NOPASSWD: ALL
 
   sudo::config::user { 'buadm' :
     user          => 'BUADM',
     configuration => 'ALL   = NOPASSWD: BUCMD'
   }
+  # BUADM    ALL   = NOPASSWD: BUCMD
 
