@@ -7,6 +7,10 @@
 # Ensure if present or absent.
 # Default: present
 #
+# [*priority*]
+# Prefix file name with $priority
+# Default: 10
+#
 # [*user*]
 # The User part of the specification.
 # Default: $title
@@ -31,33 +35,35 @@
 # [Remember: No empty lines between comments and class definition]
 define sudo::config::user(
   $ensure='present',
+  $priority=10,
   $user=$title,
   $configuration=undef
 ) {
 
   validate_re($title, '^[A-Za-z0-9_\-.]+$', "Sudo::Config::User['${title}']: title value does not match ^[A-Za-z0-9_.]+$")
 
-  #Class['sudo'] -> Sudo::Config::User[$title]
+  include sudo
+  Class['sudo'] -> Sudo::Config::User[$title]
 
   case $ensure {
     'absent': {
       include sudo::params
 
-      file { "sudo/config/user/${title}":
+      file { "sudo/config/user/${priority}_${title}":
         ensure => $ensure,
-        path   => "${sudo::params::config_dir}/users/${title}"
+        path   => "${sudo::params::config_dir}/users/${priority}_${title}"
       }
     }
     'present': {
       if $configuration {
         include sudo::params
 
-        file { "sudo/config/user/${title}":
+        file { "sudo/config/user/${priority}_${title}":
           ensure  => $ensure,
           owner   => 'root',
           group   => 'root',
           mode    => '0440',
-          path    => "${sudo::params::config_dir}/users/${title}",
+          path    => "${sudo::params::config_dir}/users/${priority}_${title}",
           content => template('sudo/config/user.erb')
         }
       } else {
@@ -68,6 +74,5 @@ define sudo::config::user(
       fail("Sudo::Config::User['${title}']: parameter ensure must be present or absent")
     }
   }
-
 
 }
