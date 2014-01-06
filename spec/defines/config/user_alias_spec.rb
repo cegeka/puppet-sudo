@@ -24,6 +24,7 @@ describe 'sudo::config::user_alias' do
         let (:params) { { :configuration => 'test' } }
 
         it { should include_class('sudo::params') }
+        it { should include_class('sudo') }
 
         it { should contain_file('sudo/config/user_alias/foo').with_owner('root') }
         it { should contain_file('sudo/config/user_alias/foo').with_group('root') }

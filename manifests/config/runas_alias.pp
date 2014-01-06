@@ -31,7 +31,8 @@ define sudo::config::runas_alias(
 
   validate_re($title, '^[A-Za-z0-9_\-.]+$', "Sudo::Config::Runas_alias['${title}']: title value does not match ^[A-Za-z0-9_.]+$")
 
-  #Class['sudo'] -> Sudo::Config::Runas_alias[$title]
+  include sudo
+  Class['sudo'] -> Sudo::Config::Runas_alias[$title]
 
   case $ensure {
     'absent': {
