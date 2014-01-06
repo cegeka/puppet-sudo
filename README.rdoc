@@ -51,7 +51,7 @@ Use this module to modify the default sudo security policy.
   sudo::config::default_entry { 'always_set_home' :
     configuration => 'always_set_home'
   }
-	# Defaults always_set_home
+  # Defaults always_set_home
 
   sudo::config::default_entry { 'secure_path' :
     type          => 'global',
