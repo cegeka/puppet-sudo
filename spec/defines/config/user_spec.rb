@@ -24,24 +24,26 @@ describe 'sudo::config::user' do
         let (:params) { { :configuration => 'ALL=(ALL) ALL' } }
 
         it { should include_class('sudo::params') }
+        it { should include_class('sudo') }
 
-        it { should contain_file('sudo/config/user/foo').with_owner('root') }
-        it { should contain_file('sudo/config/user/foo').with_group('root') }
-        it { should contain_file('sudo/config/user/foo').with_mode('0440') }
-        it { should contain_file('sudo/config/user/foo').with_path('/etc/sudoers.d/users/foo') }
-        it { should contain_file('sudo/config/user/foo').with_content(/foo    ALL=\(ALL\) ALL/) }
+        it { should contain_file('sudo/config/user/10_foo').with_owner('root') }
+        it { should contain_file('sudo/config/user/10_foo').with_group('root') }
+        it { should contain_file('sudo/config/user/10_foo').with_mode('0440') }
+        it { should contain_file('sudo/config/user/10_foo').with_path('/etc/sudoers.d/users/10_foo') }
+        it { should contain_file('sudo/config/user/10_foo').with_content(/foo    ALL=\(ALL\) ALL/) }
       end
 
       context 'with user => root and configuration => ALL=(ALL) ALL' do
         let (:params) { { :user => 'root', :configuration => 'ALL=(ALL) ALL' } }
 
         it { should include_class('sudo::params') }
+        it { should include_class('sudo') }
 
-        it { should contain_file('sudo/config/user/foo').with_owner('root') }
-        it { should contain_file('sudo/config/user/foo').with_group('root') }
-        it { should contain_file('sudo/config/user/foo').with_mode('0440') }
-        it { should contain_file('sudo/config/user/foo').with_path('/etc/sudoers.d/users/foo') }
-        it { should contain_file('sudo/config/user/foo').with_content(/root    ALL=\(ALL\) ALL/) }
+        it { should contain_file('sudo/config/user/10_foo').with_owner('root') }
+        it { should contain_file('sudo/config/user/10_foo').with_group('root') }
+        it { should contain_file('sudo/config/user/10_foo').with_mode('0440') }
+        it { should contain_file('sudo/config/user/10_foo').with_path('/etc/sudoers.d/users/10_foo') }
+        it { should contain_file('sudo/config/user/10_foo').with_content(/root    ALL=\(ALL\) ALL/) }
       end
     end
   end
