@@ -31,7 +31,8 @@ define sudo::config::host_alias(
 
   validate_re($title, '^[A-Za-z0-9_\-.]+$', "Sudo::Config::Host_alias['${title}']: title value does not match ^[A-Za-z0-9_.]+$")
 
-  #Class['sudo'] -> Sudo::Config::Host_alias[$title]
+  include sudo
+  Class['sudo'] -> Sudo::Config::Host_alias[$title]
 
   case $ensure {
     'absent': {

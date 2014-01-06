@@ -5,7 +5,6 @@ require 'spec_helper'
 describe 'sudo::config::cmnd_alias' do
   context 'with title foo' do
     let (:title) { 'foo' }
-    #let (:pre_condition) { "class sudo {}" }
 
     context 'on osfamily RedHat' do
       let (:facts) { {
@@ -24,6 +23,7 @@ describe 'sudo::config::cmnd_alias' do
         let (:params) { { :configuration => 'test' } }
 
         it { should include_class('sudo::params') }
+        it { should include_class('sudo') }
 
         it { should contain_file('sudo/config/cmnd_alias/foo').with_owner('root') }
         it { should contain_file('sudo/config/cmnd_alias/foo').with_group('root') }

@@ -41,7 +41,8 @@ define sudo::config::default_entry(
 
   validate_re($title, '^[A-Za-z0-9_\-.]+$', "Sudo::Config::Default_entry['${title}']: title value does not match ^[A-Za-z0-9_.]+$")
 
-  #Class['sudo'] -> Sudo::Config::Default_entry[$title]
+  include sudo
+  Class['sudo'] -> Sudo::Config::Default_entry[$title]
 
   case $ensure {
     'absent': {
