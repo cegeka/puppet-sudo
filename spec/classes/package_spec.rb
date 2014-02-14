@@ -20,7 +20,7 @@ describe 'sudo::package' do
   context 'with version => present' do
     let (:params) { { :version => 'present' } }
 
-    it { should include_class('sudo::params') }
+    it { should contain_class('sudo::params') }
 
     it { should contain_package('sudo').with_ensure('present') }
   end
