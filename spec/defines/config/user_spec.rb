@@ -23,8 +23,8 @@ describe 'sudo::config::user' do
       context 'with configuration => ALL=(ALL) ALL' do
         let (:params) { { :configuration => 'ALL=(ALL) ALL' } }
 
-        it { should include_class('sudo::params') }
-        it { should include_class('sudo') }
+        it { should contain_class('sudo::params') }
+        it { should contain_class('sudo') }
 
         it { should contain_file('sudo/config/user/10_foo').with_owner('root') }
         it { should contain_file('sudo/config/user/10_foo').with_group('root') }
@@ -36,8 +36,8 @@ describe 'sudo::config::user' do
       context 'with user => root and configuration => ALL=(ALL) ALL' do
         let (:params) { { :user => 'root', :configuration => 'ALL=(ALL) ALL' } }
 
-        it { should include_class('sudo::params') }
-        it { should include_class('sudo') }
+        it { should contain_class('sudo::params') }
+        it { should contain_class('sudo') }
 
         it { should contain_file('sudo/config/user/10_foo').with_owner('root') }
         it { should contain_file('sudo/config/user/10_foo').with_group('root') }

@@ -22,7 +22,7 @@ describe 'sudo' do
     context 'with default parameters' do
       let (:params) { { } }
 
-      it { should include_class('sudo::params') }
+      it { should contain_class('sudo::params') }
 
       it { should contain_class('sudo').with_version('present') }
 

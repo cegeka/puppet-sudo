@@ -31,8 +31,8 @@ describe 'sudo::config::default_entry' do
       context 'with configuration => test' do
         let (:params) { { :configuration => 'test' } }
 
-        it { should include_class('sudo::params') }
-        it { should include_class('sudo') }
+        it { should contain_class('sudo::params') }
+        it { should contain_class('sudo') }
 
         it { should contain_file('sudo/config/defaults/global/foo').with_owner('root') }
         it { should contain_file('sudo/config/defaults/global/foo').with_group('root') }

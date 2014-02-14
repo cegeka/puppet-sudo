@@ -7,7 +7,7 @@ describe 'sudo::config' do
     :osfamily => 'RedHat'
   } }
 
-  it { should include_class('sudo::params') }
+  it { should contain_class('sudo::params') }
 
   it { should contain_file('/etc/sudoers').with_ensure('file') }
   it { should contain_file('/etc/sudoers').with_owner('root') }
