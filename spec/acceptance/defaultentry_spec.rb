@@ -21,8 +21,6 @@ describe 'sudo::config::default_entry' do
       its(:content) { should contain /!visiblepw/ }
     end
     
-    it { should contain_file('/etc/sudoers.d/defaults/global/visiblepw').with_mode('0440').with_owner('root').with_group('root') }
-
   end
 end
 
