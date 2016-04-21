@@ -5,6 +5,7 @@ describe 'sudo::config::cmnd_alias' do
   describe 'running puppet code' do
     it 'should work with no errors' do
       pp = <<-EOS
+        include ::sudo
         sudo::config::cmnd_alias { 'foo-cmnd' :
           configuration => 'FOOALIAS = /usr/bin/foo'
         }

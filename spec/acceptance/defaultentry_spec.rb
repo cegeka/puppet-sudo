@@ -5,9 +5,10 @@ describe 'sudo::config::default_entry' do
   describe 'running puppet code' do
     it 'should work with no errors' do
       pp = <<-EOS
-      sudo::config::default_entry { 'visiblepw' :
-        configuration => '!visiblepw'
-      }
+        include ::sudo
+        sudo::config::default_entry { 'visiblepw' :
+          configuration => '!visiblepw'
+        }
       EOS
 
       # Run it twice and test for idempotency

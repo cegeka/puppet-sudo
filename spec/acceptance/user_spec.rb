@@ -5,9 +5,10 @@ describe 'sudo::config::user' do
   describe 'running puppet code' do
     it 'should work with no errors' do
       pp = <<-EOS
+        include ::sudo
         sudo::config::user { 'foo-user' :
           user => 'foo',
-          priority => '10'
+          priority => '10',
           configuration => 'ALL=(ALL) NOPASSWD: /usr/bin/foo'
         }
       EOS
