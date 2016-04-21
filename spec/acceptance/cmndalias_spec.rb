@@ -16,7 +16,7 @@ describe 'sudo::config::cmnd_alias' do
       apply_manifest(pp, :catch_changes => true)
     end
 
-    describe file '/etc/sudoers.d/cmnd_aliases/foo-foocmnd' do
+    describe file '/etc/sudoers.d/cmnd_aliases/foo-cmnd' do
       it { is_expected.to be_file }
       its(:content) { should contain /FOOALIAS/ }
     end
