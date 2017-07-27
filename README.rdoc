@@ -1,6 +1,6 @@
 = puppet-sudo module
 
-{<img src='https://codex.cegeka.be/jenkins/job/puppet-sudo/badge/icon' />}[https://codex.cegeka.be/jenkins/job/puppet-sudo/]
+{<img src='https://jenkins-iac.cegeka.be/job/puppet-sudo/badge/icon' />}[https://jenkins-iac.cegeka.be/job/puppet-sudo/]
 
 Use this module to modify the default sudo security policy.
 
