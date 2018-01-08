@@ -132,3 +132,4 @@ Use this module to modify the default sudo security policy.
   }
   # BUADM    ALL   = NOPASSWD: BUCMD
 
+
