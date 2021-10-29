@@ -18,6 +18,7 @@ class sudo::params () {
         '#includedir /etc/sudoers.d/defaults/user',
         '#includedir /etc/sudoers.d/users',
       ]
+      $purge_unmanaged_sudo_rules = true
     }
     default: {
       fail("Class[sudo::params]: osfamily ${::osfamily} is not supported")

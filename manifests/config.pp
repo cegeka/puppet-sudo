@@ -1,5 +1,6 @@
 class sudo::config (
-  $config_file_includes = $sudo::params::config_file_includes
+  $config_file_includes = $sudo::params::config_file_includes,
+  $purge_unmanaged_sudo_rules = $sudo::params::purge_unmanaged_sudo_rules,
 ) {
 
   include sudo::params
@@ -18,7 +19,7 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     recurse => true,
-    purge   => true
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/host_aliases' :
