@@ -1,13 +1,15 @@
-class sudo::config {
+class sudo::config (
+  $config_file_includes = $sudo::params::config_file_includes
+) {
 
   include sudo::params
 
   file { $sudo::params::config_file :
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0440',
-    source => "puppet:///modules/${module_name}/etc/sudoers"
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0440',
+    content => template("${module_name}/sudoers_conf.erb")
   }
 
   file { $sudo::params::config_dir :
