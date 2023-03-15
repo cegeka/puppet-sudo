@@ -28,7 +28,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/host_aliases",
-    require => File[$sudo::params::config_dir]
+    require => File[$sudo::params::config_dir],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/user_aliases' :
@@ -37,7 +39,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/user_aliases",
-    require => File[$sudo::params::config_dir]
+    require => File[$sudo::params::config_dir],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/cmnd_aliases' :
@@ -46,7 +50,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/cmnd_aliases",
-    require => File[$sudo::params::config_dir]
+    require => File[$sudo::params::config_dir],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/runas_aliases' :
@@ -55,7 +61,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/runas_aliases",
-    require => File[$sudo::params::config_dir]
+    require => File[$sudo::params::config_dir],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/defaults' :
@@ -64,7 +72,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/defaults",
-    require => File[$sudo::params::config_dir]
+    require => File[$sudo::params::config_dir],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/defaults/cmnd' :
@@ -73,7 +83,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/defaults/cmnd",
-    require => File['sudoers/defaults']
+    require => File['sudoers/defaults'],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/defaults/env' :
@@ -82,7 +94,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/defaults/env",
-    require => File['sudoers/defaults']
+    require => File['sudoers/defaults'],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/defaults/global' :
@@ -91,7 +105,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/defaults/global",
-    require => File['sudoers/defaults']
+    require => File['sudoers/defaults'],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/defaults/host' :
@@ -100,7 +116,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/defaults/host",
-    require => File['sudoers/defaults']
+    require => File['sudoers/defaults'],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/defaults/runas' :
@@ -109,7 +127,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/defaults/runas",
-    require => File['sudoers/defaults']
+    require => File['sudoers/defaults'],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/defaults/user' :
@@ -118,7 +138,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/defaults/user",
-    require => File['sudoers/defaults']
+    require => File['sudoers/defaults'],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
   file { 'sudoers/users' :
@@ -127,7 +149,9 @@ class sudo::config (
     group   => 'root',
     mode    => '0550',
     path    => "${sudo::params::config_dir}/users",
-    require => File[$sudo::params::config_dir]
+    require => File[$sudo::params::config_dir],
+    recurse => true,
+    purge   => $purge_unmanaged_sudo_rules
   }
 
 }
